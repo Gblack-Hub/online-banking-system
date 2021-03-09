@@ -32,7 +32,6 @@ if(isset($_SESSION['user_id'])){
     <?php
         include 'links.php';
     ?>
-    <link rel="stylesheet" href="./styles/index.css">
 </head>
 <body>
     <header>
@@ -139,37 +138,11 @@ if(isset($_SESSION['user_id'])){
            		</div>
         	</div> -->
         </div>
-        <div class="modal fade" id="myModal">
-          <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h4 class="modal-title">Open Account</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-              </div>
-              <div class="modal-body">
-                <p class="text-center">Select account type to open.</p>
-                <form action="acctreg.php" method="POST">
-                    <div class="form-group">
-                        <select name="acct_type" class="form-control">
-                            <option value="1">Savings</option>
-                            <option value="2">Current</option>
-                            <option value="3">Domiciliary</option>
-                        </select>
-                    </div>
-                    <div class="text-center">
-                        <input type="submit" class="btn btn-primary" value="Submit" name="">
-                    </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
     </main>
 
 	<?php
         include 'scripts.php';
     ?>
-    <script type="text/javascript" src="./scripts/index.js"></script>
 
 </body>
 </html>

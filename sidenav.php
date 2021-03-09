@@ -15,24 +15,49 @@
         <hr width="80%" class="bg-light" />
     -->
     
-        <a href="./index.php" class="nav-link">
-            <span class="mr-2"><i class="fa fa-home"></i></span>Dashboard
-        </a>
-    
-        <a href="./myProfile.php" class="nav-link">
-            <span class="mr-2"><i class="fa fa-user"></i></span>My Profile
-        </a>
-    
-        <a href="./accountStatement.php" class="nav-link">
-            <span class="mr-2"><i class="fa fa-list"></i></span>Account Statement
-        </a>
-        
-        <a data-toggle="modal" data-target="#myModal" class="nav-link text-white cursorPointer">
-            <span class="mr-2"><i class="fa fa-list"></i></span>Open Account
-        </a>
+    <a href="./index.php" class="nav-link">
+        <span class="mr-2"><i class="fa fa-home"></i></span>Dashboard
+    </a>
 
-        <a href="./logout.php" class="nav-link text-warning">
-            <span class="mr-2"><i class="fa fa-power-off"></i></span>Logout
-        </a>
+    <a href="./myProfile.php" class="nav-link">
+        <span class="mr-2"><i class="fa fa-user"></i></span>My Profile
+    </a>
+
+    <a href="./accountStatement.php" class="nav-link">
+        <span class="mr-2"><i class="fa fa-list"></i></span>Account Statement
+    </a>
     
+    <a data-toggle="modal" data-target="#myModal" class="nav-link text-white cursorPointer">
+        <span class="mr-2"><i class="fa fa-pencil"></i></span>Open Account
+    </a>
+
+    <a href="./logout.php" class="nav-link text-warning">
+        <span class="mr-2"><i class="fa fa-power-off"></i></span>Logout
+    </a>
+</div>
+
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Open Account</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p class="text-center">Select account type to open.</p>
+        <form action="acctreg.php" method="POST">
+            <div class="form-group">
+                <select name="acct_type" class="form-control">
+                    <option value="1">Savings</option>
+                    <option value="2">Current</option>
+                    <option value="3">Domiciliary</option>
+                </select>
+            </div>
+            <div class="text-center">
+                <input type="submit" class="btn btn-primary" value="Submit" name="">
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>

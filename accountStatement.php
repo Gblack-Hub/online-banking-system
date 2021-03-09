@@ -24,88 +24,99 @@
 <body>
 	<header>
 		<?php
-			include "headers.php";
+			include "sidenav.php";
 		?>
 	</header>
-	<main class="container">
-		<div class="row">
-			<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
-				<div class="text-center text-white display-4">ACCOUNT STATEMENT</div>
+	<main id="main">
+		<?php
+			include "headers.php";
+      ?>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
+					<div class="text-center text-white display-4">ACCOUNT STATEMENT</div>
+				</div>
 			</div>
-		</div>
-		<div class="text-center h5 mt-2"></div>
-		<div class="row">
-			<div class="col-md-3"></div>
-			<div class="col-md-6 mb-4">
-				<form action="accountStatement.php" method="POST">
-				<?php
-					if($result_get_acct >= 0){
-						echo "<select class='form-control' id='acct_select'>";
-			    		while($ans = mysqli_fetch_assoc($query_get_acct)){
-					    	echo "<option value=".$ans['acct_number'].">".$ans['acct_type']."</option>";
-					    	$acct_number_select = $ans['acct_number'];
-						}
-						echo "</select>";
-			    	}
-
-					echo "<button type='submit' name='acct_selected' id='acct_selected' class='btn btn-block'>Submit</button>";
-				?>
-				</form>
-			</div>
-			<div class="col-md-3"></div>
-		</div>
-		<div class="row">
-			<table border="1" class="table table-responsive-sm table-striped table-hover">
-				<thead class="thead-dark">
-					<tr>
-						<th>SN</th>
-						<th>MADE BY</th>
-						<th>DEBITS</th>
-						<th>CREDITS</th>
-						<th>BALANCE</th>
-						<th>DATE</th>
-					</tr>
-				</thead>
-				<tbody>
+			<div class="text-center h5 mt-2"></div>
+			<div class="row">
+				<div class="col-md-3"></div>
+				<div class="col-md-6 mb-4">
+					<form action="accountStatement.php" method="POST">
 					<?php
-    				#displays the selected account's statement
-					$query = mysqli_query($con, "SELECT * FROM transactions_tb t join user_tb u on (t.trans_by = u.user_id) WHERE acct_number=$acct_number_select");
-					$no = 0;
-						while ($r = mysqli_fetch_array($query)) {
-							$no++;
-							echo "
-								<tr>
-									<td>".$no."</td>
-									<td>".$r['firstname']." ".$r['lastname']."</td>
-									<td>".$r['debit']."</td>
-									<td>".$r['credit']."</td>
-									<td>".$r['balance']."</td>
-									<td>".$r['trans_date']."</td>
-								</tr>
-							";
-						}
-						} else {
-							include 'links.php';
-							include "headers.php";
-					    	echo "<div class='alert alert-warning text-center
-					    	'>
-										<span>Sorry, You have no account with our bank, click <a href='index.php'>here</a> to open an account</span>
-									</div>".mysqli_error($con);
-					    }
+						if($result_get_acct >= 0){
+							echo "<select class='form-control' id='acct_select'>";
+				    		while($ans = mysqli_fetch_assoc($query_get_acct)){
+						    	echo "<option value=".$ans['acct_number'].">".$ans['acct_type']."</option>";
+						    	$acct_number_select = $ans['acct_number'];
+							}
+							echo "</select>";
+				    	}
+
+						echo "<button type='submit' name='acct_selected' id='acct_selected' class='btn btn-block'>Submit</button>";
 					?>
-				</tbody>
-			</table>
-		</div>
-		<div>
-			<div class="text-center">
-				<button class="btn">Print this statement</button>
+					</form>
+				</div>
+				<div class="col-md-3"></div>
 			</div>
+			<div class="row">
+				<table border="1" class="table table-responsive-sm table-striped table-hover">
+					<thead class="thead-dark">
+						<tr>
+							<th>SN</th>
+							<th>MADE BY</th>
+							<th>DEBITS</th>
+							<th>CREDITS</th>
+							<th>BALANCE</th>
+							<th>DATE</th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php
+	    				#displays the selected account's statement
+						$query = mysqli_query($con, "SELECT * FROM transactions_tb t join user_tb u on (t.trans_by = u.user_id) WHERE acct_number=$acct_number_select");
+						$no = 0;
+							while ($r = mysqli_fetch_array($query)) {
+								$no++;
+								echo "
+									<tr>
+										<td>".$no."</td>
+										<td>".$r['firstname']." ".$r['lastname']."</td>
+										<td>".$r['debit']."</td>
+										<td>".$r['credit']."</td>
+										<td>".$r['balance']."</td>
+										<td>".$r['trans_date']."</td>
+									</tr>
+								";
+							}
+							} else {
+								include 'links.php';
+								include "sidenav.php";
+								include "headers.php";
+						    	echo "
+						    			<main id='main'>
+							    			<div class='alert alert-warning text-center'>
+												<span>Sorry, You have no account with our bank, click <a class='text-primary cursorPointer' data-toggle='modal' data-target='#myModal'>here</a> to open an account</span>
+											</div>
+										</main>".mysqli_error($con);
+
+						    }
+						?>
+					</tbody>
+				</table>
+			</div>
+			<!-- <div>
+				<div class="text-center">
+					<button class="btn">Print this statement</button>
+				</div>
+			</div> -->
 		</div>
 	</main>
 	<footer>
 
 	</footer>
-
+	<?php
+		include 'scripts.php';
+   ?>
 </body>
 </html>
 <!-- <?php

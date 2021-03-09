@@ -157,6 +157,8 @@ else if(isset($_POST['deleteAcct'])){
 		</div>
 	</main>
 	<footer></footer>
-
+	<?php
+   	include 'scripts.php';
+   ?>
 </body>
 </html>
