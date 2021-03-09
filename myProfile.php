@@ -1,56 +1,56 @@
 <?php session_start();
-	$user_id = $_SESSION['user_id'];
+	if(isset($_SESSION['user_id'])){
+		$user_id = $_SESSION['user_id'];
+	   require("mycon.php");
+	   $query_get = mysqli_query($con, "SELECT * FROM user_tb where user_id = $user_id");
+	   $query_get_account = mysqli_query($con,"SELECT acct_number, acct_type FROM account_tb JOIN account_type_tb USING(acct_type_id) WHERE user_id=$user_id");
 
-    require("mycon.php");
-    $query_get = mysqli_query($con, "SELECT * FROM user_tb where user_id = $user_id");
-    $query_get_account = mysqli_query($con,"SELECT acct_number, acct_type FROM account_tb JOIN account_type_tb USING(acct_type_id) WHERE user_id=$user_id");
+	   $r = mysqli_fetch_assoc($query_get);
+		if(isset($_POST['update'])){
+			$fname = $_POST['fname'];
+		    $lname = $_POST['lname'];
+		    $email = $_POST['email'];
+		    $password = $_POST['password'];
+		    $dob = $_POST['dob'];
+		    $pnumber = $_POST['pnumber'];
+		    $gender = $_POST['gender'];
 
-    $r = mysqli_fetch_assoc($query_get);
-if(isset($_POST['update'])){
-	$fname = $_POST['fname'];
-    $lname = $_POST['lname'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-    $dob = $_POST['dob'];
-    $pnumber = $_POST['pnumber'];
-    $gender = $_POST['gender'];
+		    $file = "uploads/".$_FILES['pix']['name'];
+		    $fileType = $_FILES['pix']['type'];
+		    $fileSize = $_FILES['pix']['size'];
+		    $temp = $_FILES['pix']['tmp_name'];
+		    // $passport = $_POST['passport'];
 
-    $file = "uploads/".$_FILES['pix']['name'];
-    $fileType = $_FILES['pix']['type'];
-    $fileSize = $_FILES['pix']['size'];
-    $temp = $_FILES['pix']['tmp_name'];
-    // $passport = $_POST['passport'];
-
-    if($con){
-        if($fileSize <= 500000){
-            // if($fileType == "jpg" || "png" || "jpeg"){
-            //     echo "Sorry, only JPG, JPEG and PNG passport photographs are allowed";
-            // } else {
-                $query = mysqli_query($con, "UPDATE user_tb SET firstname = '$fname', lastname = '$lname', email = '$email',
-                												password = '$password', date_of_birth = '$dob', phone_number = '$pnumber',
-                												gender = '$gender', passport = '$file' WHERE user_id = $user_id");
-                move_uploaded_file($temp, $file);
-                if($query){
-                	// $msg = "Profile update successful";
-                	echo "Profile update successful";
-                } else {
-                	// $msg = "Update failed, kindly contact our customer care".mysqli_error($con);
-                	echo "Update failed, kindly contact our customer care".mysqli_error($con);
-                }
-                include "login.html";
-            // }
-        } else {
-            echo "Sorry, your passport is too large";
-        }
-    } else {
-        die("connection failed:".mysqli_error($con));
-    }
-}
-#DELETE ACCOUNT SECTION
-else if(isset($_POST['deleteAcct'])){
-	$id = $_GET[1];
-	echo $id;
-}
+		    if($con){
+		        if($fileSize <= 500000){
+		            // if($fileType == "jpg" || "png" || "jpeg"){
+		            //     echo "Sorry, only JPG, JPEG and PNG passport photographs are allowed";
+		            // } else {
+		                $query = mysqli_query($con, "UPDATE user_tb SET firstname = '$fname', lastname = '$lname', email = '$email',
+		                												password = '$password', date_of_birth = '$dob', phone_number = '$pnumber',
+		                												gender = '$gender', passport = '$file' WHERE user_id = $user_id");
+		                move_uploaded_file($temp, $file);
+		                if($query){
+		                	// $msg = "Profile update successful";
+		                	echo "Profile update successful";
+		                } else {
+		                	// $msg = "Update failed, kindly contact our customer care".mysqli_error($con);
+		                	echo "Update failed, kindly contact our customer care".mysqli_error($con);
+		                }
+		                include "login.html";
+		            // }
+		        } else {
+		            echo "Sorry, your passport is too large";
+		        }
+		    } else {
+		        die("connection failed:".mysqli_error($con));
+		    }
+		}
+		#DELETE ACCOUNT SECTION
+		else if(isset($_POST['deleteAcct'])){
+			$id = $_GET[1];
+			echo $id;
+		}
     // // $data = json_decode(file_get_contents('php://input'), true);
     // // $resp = array();
 
@@ -162,3 +162,8 @@ else if(isset($_POST['deleteAcct'])){
    ?>
 </body>
 </html>
+<?php
+} else {
+    header("Location: login.php");
+}
+?>

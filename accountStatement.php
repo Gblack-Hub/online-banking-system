@@ -1,14 +1,15 @@
 <?php session_start();
 	require('mycon.php');
-	$user_id = $_SESSION['user_id'];
-   // $acct_no1 = $_SESSION['acct_no1'];
+	if(isset($_SESSION['user_id'])){
+		$user_id = $_SESSION['user_id'];
+   	// $acct_no1 = $_SESSION['acct_no1'];
 
-    if(isset($_SESSION['acct_no1'])){
-		// echo $ans['acct_number'];
-    	$query_get_acct = mysqli_query($con, "SELECT acct_number, acct_type FROM account_tb JOIN account_type_tb USING(acct_type_id) WHERE user_id=$user_id");
-    	$result_get_acct = mysqli_num_rows($query_get_acct);
+   	if(isset($_SESSION['acct_no1'])){
+			// echo $ans['acct_number'];
+	    	$query_get_acct = mysqli_query($con, "SELECT acct_number, acct_type FROM account_tb JOIN account_type_tb USING(acct_type_id) WHERE user_id=$user_id");
+	    	$result_get_acct = mysqli_num_rows($query_get_acct);
 
-    	#trying to get all current user's account and loop through it in the select area
+	    	#trying to get all current user's account and loop through it in the select area
 
 ?>
 <!DOCTYPE html>
@@ -119,6 +120,11 @@
    ?>
 </body>
 </html>
+<?php
+} else {
+    header("Location: login.php");
+}
+?>
 <!-- <?php
 	// echo "
 	// 	<script language='javascript'>
