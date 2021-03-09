@@ -60,7 +60,7 @@ else if(isset($_POST['deleteAcct'])){
 <head>
 	<meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Profile Details</title>
+	<title>Profile | Online Banking App</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
    <?php
 		include 'links.php';
@@ -69,86 +69,91 @@ else if(isset($_POST['deleteAcct'])){
 <body>
 	<header>
     	<?php
-          include "headers.php";
+          include "sidenav.php";
       ?>
    </header>
-	<main class="container">
-		<div class="row">
-			<div class="col-sm-12 col-md-12 col-lg-12">
-				<div class="text-center display-4">MY PROFILE</div>
+	<main id="main">
+		<?php
+         include "headers.php";
+     	?>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-sm-12 col-md-12 col-lg-12">
+					<div class="text-center display-4">MY PROFILE</div>
+				</div>
 			</div>
-		</div>
-		<hr />
-		<div class="row">
-			<div class="col-sm-12 col-md-3 col-lg-3 col-xl-3"></div>
-			<div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
-				<!-- <div><?php #if(isset($msg)){ echo $msg; } ?></div> -->
-				<form class="form" action="myProfile.php" method="POST" enctype="multipart/form-data">
-					<h5 class="text-center">PERSONAL INFORMATION</h5>
-					<label class="mr-sm-2 font-weight-bold">Firstname</label>
-					<input type="text" name="fname" class="form-control" value="<?php echo $r['firstname']; ?>" placeholder="Firstname" />
-					<label class="mr-sm-2 font-weight-bold">Lastname</label>
-					<input type="text" name="lname" class="form-control" value="<?php echo $r['lastname']; ?>" placeholder="Lastname" />
-					<label class="mr-sm-2 font-weight-bold">Date of Birth</label>
-					<input type="date" name="dob" class="form-control" value="<?php echo $r['date_of_birth']; ?>" placeholder="Date" />
-					<label class="mr-sm-2 font-weight-bold">Gender</label> <br />
-					<!-- <input type="radio" name="gender" value="male" /> Male
-					<input type="radio" name="gender" value="female" /> Female <br /> -->
-					<select name="gender" class="form-control">
-						<option value="male">Male</option>
-						<option value="female">Female</option>
-					</select>
+			<hr />
+			<div class="row">
+				<div class="col-sm-12 col-md-3 col-lg-3 col-xl-3"></div>
+				<div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
+					<!-- <div><?php #if(isset($msg)){ echo $msg; } ?></div> -->
+					<form class="form" action="myProfile.php" method="POST" enctype="multipart/form-data">
+						<h5 class="text-center">PERSONAL INFORMATION</h5>
+						<label class="mr-sm-2 font-weight-bold">Firstname</label>
+						<input type="text" name="fname" class="form-control" value="<?php echo $r['firstname']; ?>" placeholder="Firstname" />
+						<label class="mr-sm-2 font-weight-bold">Lastname</label>
+						<input type="text" name="lname" class="form-control" value="<?php echo $r['lastname']; ?>" placeholder="Lastname" />
+						<label class="mr-sm-2 font-weight-bold">Date of Birth</label>
+						<input type="date" name="dob" class="form-control" value="<?php echo $r['date_of_birth']; ?>" placeholder="Date" />
+						<label class="mr-sm-2 font-weight-bold">Gender</label> <br />
+						<!-- <input type="radio" name="gender" value="male" /> Male
+						<input type="radio" name="gender" value="female" /> Female <br /> -->
+						<select name="gender" class="form-control">
+							<option value="male">Male</option>
+							<option value="female">Female</option>
+						</select>
 
-					<h5 class="text-center">CONTACT INFORMATION</h5>
-					<div class="form-group">
-						<label class="mr-sm-2 font-weight-bold">Phone Number</label>
-						<input type="text" name="pnumber" class="form-control" value="<?php echo $r['phone_number']; ?>" placeholder="Phone Number" />
-					</div>
-					<div class="form-group">
-						<label class="mr-sm-2 font-weight-bold">Email</label>
-						<input type="email" name="email" class="form-control" value="<?php echo $r['email']; ?>" placeholder="E-mail" /> <br />
-					</div>
-					<h5 class="text-center">OTHERS</h5>
-					<!-- <div class="form-group">
-						<label class="mr-sm-2 font-weight-bold">Password</label>
-						<input type="password" name="password" class="pwd form-control mb-2" value="<?php echo $r['password']; ?>" placeholder="Password" />
-						<input type="checkbox" class="shwPwd" name=""> Show Password
-					</div> -->
-					<div class="form-group">
-						<label class="mr-sm-2 font-weight-bold">Choose Passport</label>
-						<input class="form-control" type="file" name="pix" /><br />
-					</div>
-					<input type="submit" value="Update Profile" name="update" class="btn btn-primary btn-block">
-				</form>
+						<h5 class="text-center">CONTACT INFORMATION</h5>
+						<div class="form-group">
+							<label class="mr-sm-2 font-weight-bold">Phone Number</label>
+							<input type="text" name="pnumber" class="form-control" value="<?php echo $r['phone_number']; ?>" placeholder="Phone Number" />
+						</div>
+						<div class="form-group">
+							<label class="mr-sm-2 font-weight-bold">Email</label>
+							<input type="email" name="email" class="form-control" value="<?php echo $r['email']; ?>" placeholder="E-mail" /> <br />
+						</div>
+						<h5 class="text-center">OTHERS</h5>
+						<!-- <div class="form-group">
+							<label class="mr-sm-2 font-weight-bold">Password</label>
+							<input type="password" name="password" class="pwd form-control mb-2" value="<?php echo $r['password']; ?>" placeholder="Password" />
+							<input type="checkbox" class="shwPwd" name=""> Show Password
+						</div> -->
+						<div class="form-group">
+							<label class="mr-sm-2 font-weight-bold">Choose Passport</label>
+							<input class="form-control" type="file" name="pix" /><br />
+						</div>
+						<input type="submit" value="Update Profile" name="update" class="btn btn-primary btn-block">
+					</form>
+				</div>
+				<div class="col-sm-12 col-md-3 col-lg-3 col-xl-3"></div>
+
+				<!-- <div class="col-md-6">
+					<h5 class="text-center">ACCOUNT(S)</h5>
+					<table class="table table-borderles">
+						<thead>
+							<tr>
+								<th>Account</th>
+								<th>Account Number</th>
+								<th>Delete</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php
+							while($r = mysqli_fetch_array($query_get_account)){
+								// echo json_encode($r);
+								echo "
+									<tr>
+										<td>".$r[1]."</td>
+										<td>".$r[0]."</td>
+										<td>"."<a name='deleteAcct' onClick=\"javascript: return confirm('Are you sure you want to delete your ".$r[1]." account?');\" href='delete.php?id=".$r[0]." '><i class='fa fa-trash text-dark'></i></a>"."</td>
+									</tr>
+								";
+							}
+							?>
+						</tbody>
+					</table>
+				</div> -->
 			</div>
-			<div class="col-sm-12 col-md-3 col-lg-3 col-xl-3"></div>
-
-			<!-- <div class="col-md-6">
-				<h5 class="text-center">ACCOUNT(S)</h5>
-				<table class="table table-borderles">
-					<thead>
-						<tr>
-							<th>Account</th>
-							<th>Account Number</th>
-							<th>Delete</th>
-						</tr>
-					</thead>
-					<tbody>
-						<?php
-						while($r = mysqli_fetch_array($query_get_account)){
-							// echo json_encode($r);
-							echo "
-								<tr>
-									<td>".$r[1]."</td>
-									<td>".$r[0]."</td>
-									<td>"."<a name='deleteAcct' onClick=\"javascript: return confirm('Are you sure you want to delete your ".$r[1]." account?');\" href='delete.php?id=".$r[0]." '><i class='fa fa-trash text-dark'></i></a>"."</td>
-								</tr>
-							";
-						}
-						?>
-					</tbody>
-				</table>
-			</div> -->
 		</div>
 	</main>
 	<footer></footer>

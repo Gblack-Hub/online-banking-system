@@ -1,7 +1,9 @@
 <div id="mySidenav" class="sidenav">
-    <button class="closebtn" onclick="closeNav()">&times;</button>
+    <button class="closebtn btn btn-outline-light" onclick="closeNav()">
+        <span><i class="fa fa-close"></i></span>
+    </button>
     <div class="text-center">
-        <a href="#!dashboard" class="navbar-brand text-white text-uppercase"><strong>G'Bank</strong></a>
+        <a class="navbar-brand text-white text-uppercase"><strong>G'Bank</strong></a>
     </div>
 
     <!-- <hr width="80%" class="bg-light" />
@@ -25,11 +27,11 @@
             <span class="mr-2"><i class="fa fa-list"></i></span>Account Statement
         </a>
         
-        <a data-toggle="modal" data-target="#myModal" class="nav-link">
+        <a data-toggle="modal" data-target="#myModal" class="nav-link text-white cursorPointer">
             <span class="mr-2"><i class="fa fa-list"></i></span>Open Account
         </a>
 
-        <a href="./logout.php" class="nav-link">
+        <a href="./logout.php" class="nav-link text-warning">
             <span class="mr-2"><i class="fa fa-power-off"></i></span>Logout
         </a>
     

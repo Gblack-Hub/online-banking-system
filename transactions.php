@@ -30,7 +30,7 @@ if(isset($_POST['deposit'])){
 		$query_update_balance = mysqli_query($con, "UPDATE account_tb SET acct_balance = $update_bal WHERE acct_number = $acct_no");
 		if($query_update_balance){$upd_status = true;} else {echo "balance update not successful".mysqli_error($con);}
 		echo $deposit." deposited successfully";
-		// header ('location: index.php');
+		header ('location: index.php');
 		// print "<script>alert('$deposit deposited successfully')</script>";
 		// echo "<script>alert('$deposit deposited successfully')</script>";
 	} else {
@@ -125,7 +125,7 @@ else if(isset($_POST['withdraw'])){
 			$query_get_bal_result = mysqli_fetch_assoc($query_get_bal);
 			$acct_balance = $query_get_bal_result['acct_balance'];
 
-			$query_bal = mysqli_query($con, "SELECT user_id, SUM(credit-debit) AS Balance from account_tb JOIN transactions_tb USING(acct_number) WHERE acct_number=$acct_no");
+			$query_bal = mysqli_query($con, "SELECT account_tb.user_id , SUM(credit-debit) AS Balance from account_tb JOIN transactions_tb USING(acct_number) WHERE acct_number='$acct_no'");
 				$query_bal_res = mysqli_fetch_assoc($query_bal);
 				$debit_balance = $query_bal_res['Balance'] - $withdraw;
 			$query_withdraw = mysqli_query($con, "INSERT INTO transactions_tb (trans_by, debit, credit, balance, trans_date, acct_number)

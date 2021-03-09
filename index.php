@@ -6,13 +6,16 @@ if(isset($_SESSION['user_id'])){
     $result1 = mysqli_num_rows($query2);
 
     $acct_no = null; #initialised account number, incase its empty
+    echo $acct_no;
     if($result1 >= 1){
-        mysqli_fetch_all($query2, MYSQLI_ASSOC);
+        $acct_info = mysqli_fetch_assoc($query2);
+        $acct_no = $acct_info["acct_number"];
+        $_SESSION['acct_no1'] = $acct_no;
         // while($r2 = mysqli_fetch_all($query2)){
 
         // }
     } else {
-        $acct_no="You have no account yet";
+        $acct_no="No account number detected, create an account.";
     }
 	$fetch = mysqli_query($con,"SELECT acct_type_id, SUM(credit-debit) AS Balance FROM transactions_tb JOIN account_tb USING(acct_number) WHERE acct_number='$acct_no' ");
 	$r = mysqli_fetch_array($fetch);
@@ -24,63 +27,12 @@ if(isset($_SESSION['user_id'])){
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Welcome</title>
+    <title>Dashboard | Online Banking App</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?php
         include 'links.php';
     ?>
-    <style type="text/css">
-        /* The side navigation menu */
-        .sidenav {
-          height: 100%; /* 100% Full-height */
-          width: 250px; /* 0 width - change this with JavaScript */
-          position: fixed; /* Stay in place */
-          z-index: 1; /* Stay on top */
-          top: 0; /* Stay at the top */
-          left: 0;
-          background-color: #007bff; /* Blue*/
-          overflow-x: hidden; /* Disable horizontal scroll */
-          padding-top: 60px; /* Place content 60px from the top */
-          transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
-        }
-
-        /* The navigation menu links */
-        .sidenav a {
-          padding: 8px 8px 8px 32px;
-          text-decoration: none;
-          font-size: 18px;
-          color: #FFFFFF;
-          display: block;
-          transition: 0.3s;
-        }
-
-        /* When you mouse over the navigation links, change their color */
-        .sidenav a:hover {
-          color: #f1f1f1;
-        }
-
-        /* Position and style the close button (top right corner) */
-        .sidenav .closebtn {
-          position: absolute;
-          top: 0;
-          right: 25px;
-          font-size: 36px;
-          margin-left: 50px;
-        }
-
-        /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
-        #main {
-          transition: margin-left .5s;
-          /*padding: 20px;*/
-          margin-left: 250px;
-        }
-
-        /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
-        @media screen and (max-height: 450px) {
-          .sidenav {padding-top: 15px;}
-          .sidenav a {font-size: 18px;}
-        }
-    </style>
+    <link rel="stylesheet" href="./styles/index.css">
 </head>
 <body>
     <header>
@@ -95,8 +47,8 @@ if(isset($_SESSION['user_id'])){
         ?>
         <div class="container-fluid">
             <div class="row mt-2">
-                <div class="col-6">
-                    <div class="bg-danger rounded-lg p-3 text-white">
+                <div class="col-6 d-flex align-content-stretch">
+                    <div class="bg-danger rounded-lg p-3 text-white w-100">
                         <div>Balance</div>
                         <div class="lead font-weight-bold">
                                <?php
@@ -110,52 +62,61 @@ if(isset($_SESSION['user_id'])){
                     </div>
                 </div>
                 <div class="col-6 d-flex align-content-stretch">
-                    <div class="bg-warning rounded-lg p-3">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua.
+                    <div class="bg-warning rounded-lg text-right p-3 w-100">
+                        <div>Account Number:</div>
+                        <div class="font-weight-bold"><?php echo $acct_no; ?></div>
                     </div>
                 </div>
             </div>
             <div class="row pt-5">
-                <div class="col-12">
-                    <h3 class="text-center">MAKE TRANSACTIONS</h3>
-                </div>
-                <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+                <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4 mb-3 d-flex align-content-stretch">
                     <div class="card">
                         <div class="card-header">
                             <h5 class="h5 text-center">Deposit</h5>
                         </div>
                         <div class="card-body">
                             <form action="transactions.php" method="POST">
-                                <input type="number" class="form-control" placeholder="amount" name="deposit">
+                                <div class="form-group">
+                                    <label>Amount</label>
+                                    <input type="number" class="form-control" placeholder="amount" name="deposit">
+                                </div>
                                 <input type="submit" value="Submit" class="form-control bg-primary text-white" name="">
                             </form>
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+                <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4 mb-3 d-flex align-content-stretch">
                     <div class="card">
                         <div class="card-header">
                             <h5 class="h5 text-center">Fund Transfer</h5>
                         </div>
                         <div class="card-body">
                             <form action="transactions.php" method="POST">
-                                <input type="number" class="form-control" placeholder="amount" name="transfer">
+                                <div class="form-group">
+                                    <label>Amount</label>
+                                    <input type="number" class="form-control" placeholder="amount" name="transfer">
+                                </div>
                                 <!-- <input type="number" class="form-control"  name="transAcct" placeholder="receipent's account number" value="20132"> -->
-                                <input type="number" class="form-control"  name="transAcct" placeholder="receipent's account number" value="2000000">
+                                <div class="form-group">
+                                    <label>Dest. Account Number</label>
+                                    <input type="number" class="form-control"  name="transAcct" placeholder="receipent's account number" value="2000000">
+                                </div>
                                 <input type="submit" value="Submit" class="form-control bg-primary text-white" name="">
                             </form>
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+                <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4 mb-3 d-flex align-content-stretch">
                     <div class="card">
                         <div class="card-header">
                             <h5 class="h5 text-center">Withdraw</h5>
                         </div>
                         <div class="card-body">
                             <form action="transactions.php" method="POST">
-                                <input type="number" class="form-control" placeholder="amount" name="withdraw">
+                                <div class="form-group">                                
+                                    <label>Amount</label>
+                                    <input type="number" class="form-control" placeholder="amount" name="withdraw">
+                                </div>
                                 <input type="submit" value="Submit" class="form-control bg-primary text-white" name="">
                             </form>
                         </div>

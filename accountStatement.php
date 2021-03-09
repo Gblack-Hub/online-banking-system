@@ -15,7 +15,7 @@
 <html>
 <head>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <title>Account Statement</title>
+   <title>Account Statement | Online Banking App</title>
    <meta name="viewport" content="width=device-width, initial-scale=1">
 	<?php
 	   include 'links.php';

@@ -1,6 +1,6 @@
 <?php session_start();
 if(isset($_POST['acct_type'])){
-	$con = mysqli_connect("localhost","root","","bank_db");
+	require('mycon.php');
 	#variables
 	$date = date("d-M-Y"); #acct creation date
 	$acct_type = $_POST['acct_type']; #acct type
@@ -29,7 +29,7 @@ if(isset($_POST['acct_type'])){
 
 			if($query){
 				$fetch_id = mysqli_query($con, "SELECT acct_number FROM account_tb WHERE user_id='$user_id'");
-				$fetch_id_result = mysqli_num_rows($fetch_id);
+				$fetch_id_result = mysqli_num_rows($fetch_id)
 				if($fetch_id_result > 0){
 					while ($r = mysqli_fetch_assoc($fetch_id)){
 						// $fetched_id = $r['acct_id']; #fetches the newly generated acct_id for use
