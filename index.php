@@ -15,7 +15,7 @@ if(isset($_SESSION['user_id'])){
 
         // }
     } else {
-        $acct_no="No account number detected, create an account.";
+        $acct_no="No account number detected.";
     }
 	$fetch = mysqli_query($con,"SELECT acct_type_id, SUM(credit-debit) AS Balance FROM transactions_tb JOIN account_tb USING(acct_number) WHERE acct_number='$acct_no' ");
 	$r = mysqli_fetch_array($fetch);
