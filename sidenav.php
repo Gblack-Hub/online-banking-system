@@ -24,7 +24,11 @@
         <a href="./accountStatement.php" class="nav-link">
             <span class="mr-2"><i class="fa fa-list"></i></span>Account Statement
         </a>
-    
+        
+        <a data-toggle="modal" data-target="#myModal" class="nav-link">
+            <span class="mr-2"><i class="fa fa-list"></i></span>Open Account
+        </a>
+
         <a href="./logout.php" class="nav-link">
             <span class="mr-2"><i class="fa fa-power-off"></i></span>Logout
         </a>
